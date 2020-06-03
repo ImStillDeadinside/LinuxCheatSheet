@@ -1,3 +1,20 @@
+How To Quickly Get Linux Up-To-Speed Cuz You Fucked It Again:
+sudo apt-get clean
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y
+sudo apt-get full-upgrade -y
+sudo apt-get install git
+sudo apt install python3-pip
+sudo apt install filezilla filezilla-common -y
+sudo apt install tor
+sudo apt install gdebi -y
+*optional*
+git clone https://github.com/LionSec/katoolin.git
+sudo cp katoolin/katoolin.py /usr/bin/katoolin
+sudo chmod +x /usr/bin/katoolin
+sudo katoolin
+===========================================================================================================================
 How to fix HTB openvpn connection issue:
 # vim /etc/sysctl.conf
 
@@ -5,6 +22,13 @@ Set following to 0:
 net.ipv6.conf.all.disable_ipv6 = 0 
 net.ipv6.conf.default.disable_ipv6 = 0
 net.ipv6.conf.lo.disable_ipv6 = 0
+===========================================================================================================================
+Virtual Machine Network Types:
+
+Bridge mode:This connects the virtual network adapter directly to the physical network
+NAT: This allows the virtual network adapter to share the host’s IP address
+Host Only: This creates a private network that the virtual network adapter shares with the host
+Custom: This allows you to create your own virtual network
 ===========================================================================================================================
 Update everything:
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get full-upgrade -y
