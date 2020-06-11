@@ -1,4 +1,4 @@
-How To Quickly Get Linux Up-To-Speed Cuz You Fucked It Again:
+How To Quickly Get Linux Up-To-Speed Cuz You Fucked It Up Again:
 sudo apt-get clean
 sudo apt-get update
 sudo apt-get upgrade -y
