@@ -33,6 +33,38 @@ Custom:
 How to install dpkg:
 	dpkg -i ~/Downloads/file.deb
 ===========================================================================================================================
+Routersploit:
+
+Install:
+	sudo apt-get install python-dev python-pip libncurses5-dev git
+	git clone https://github.com/reverse-shell/routersploit
+	cd routersploit
+	pip install -r requirements.txt
+	./rsf.py
+	
+1. Exploits, Pick the module(Press Tab Twice to Complete Module):
+	exploits/2wire/     exploits/asmax/     exploits/asus/      exploits/cisco/     exploits/dlink/     exploits/fortinet/  exploits/juniper/   exploits/linksys/   exploits/multi/     exploits/netgear/
+	
+	rsf > use exploits/dlink/dir_300_600_rce
+	
+2. Creds:
+	Modules located under creds/ directory allow running dictionary attacks against various network services.
+	Following services are currently supported:
+
+    ftp
+    ssh
+    telnet
+    http basic auth
+    http form auth
+    snmp
+	
+	rsf > use creds/
+creds/ftp_bruteforce         creds/http_basic_bruteforce  creds/http_form_bruteforce   creds/snmp_bruteforce        creds/ssh_default            creds/telnet_default         
+creds/ftp_default            creds/http_basic_default     creds/http_form_default      creds/ssh_bruteforce         creds/telnet_bruteforce      
+rsf > use creds/ssh_default
+rsf (SSH Default Creds) > 
+
+===========================================================================================================================
 CrackMapExec:
 	"crackmapexec smb <IP>"
 	"crackmapexec smb <IP> --pass-pol
