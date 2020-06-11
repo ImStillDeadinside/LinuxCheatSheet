@@ -30,12 +30,18 @@ Host Only:
 Custom: 
 	This allows you to create your own virtual network
 ===========================================================================================================================
+Free BurpSuite Pro installation:
+	https://ftuapps.dev/burp-suite-professional-edition-v2-0-11-full-all-addons-keygen/
+	1. Download and Extract
+	2. Run 'BurpSuite Loader & Keygen'
+	3. Press 'run' in upper right hand corner and Burpsuite will load
+===========================================================================================================================
 How to install dpkg:
 	dpkg -i ~/Downloads/file.deb
 ===========================================================================================================================
-Routersploit:
+<h1>Routersploit:</h1>
 
-Install:
+<h3>Install:</h3> 
 	sudo apt-get install python-dev python-pip libncurses5-dev git
 	git clone https://github.com/reverse-shell/routersploit
 	cd routersploit
@@ -65,13 +71,21 @@ rsf > use creds/ssh_default
 rsf (SSH Default Creds) > 
 
 ===========================================================================================================================
-CrackMapExec:
+CrackMapExec
+
+CrackMapExec (a.k.a CME) is a post-exploitation tool that helps automate assessing the security of large Active Directory networks. Built with stealth in mind, CME follows the concept of "Living off the Land": abusing built-in Active Directory features/protocols to achieve it's functionality and allowing it to evade most endpoint protection/IDS/IPS solutions.
+
+CME makes heavy use of the Impacket library (developed by @asolino) and the PowerSploit Toolkit (developed by @mattifestation) for working with network protocols and performing a variety of post-exploitation techniques.
+
+Although meant to be used primarily for offensive purposes (e.g. red teams), CME can be used by blue teams as well to assess account privileges, find possible misconfigurations and simulate attack scenarios.
+
 	"crackmapexec smb <IP>"
 	"crackmapexec smb <IP> --pass-pol
 		enumerates password policy
 	"crackmapexec smb <IP> --shares -u <random name> -p <random name>
 ===========================================================================================================================
 SmbClient:
+smbclient is a client that can 'talk' to an SMB/CIFS server. It offers an interface similar to that of the ftp program. Operations include things like getting files from the server to the local machine, putting files from the local machine to the server, retrieving directory information from the server and so on. 
 	smbclient -L //<IP>
 		enumerate shares(users) on a server
 	smbclient //<IP>/<shares>
@@ -85,7 +99,9 @@ Mount to host OS instead of using smbclient:
 			
 ===========================================================================================================================
 SmbMap:
-	smbmap -H <IP>
+SMBMap allows users to enumerate samba share drives across an entire domain. List share drives, drive permissions, share contents, upload/download functionality, file name auto-download pattern matching, and even execute remote commands. This tool was designed with pen testing in mind, and is intended to simplify searching for potentially sensitive data across large networks.
+	
+	"smbmap -H <IP>"
 ===========================================================================================================================
 Nmap:
 Best 12 Nmap command examples:
@@ -225,9 +241,7 @@ db_status
 Metasploit Pro:
 https://localhost:3790/
 ===========================================================================================================================
-MSFVenom Cheatsheet:
-
-	Meterpreter Commands:
+Meterpreter Commands:
 
 Core Commands
 =============
@@ -551,6 +565,121 @@ Hydra:
 	hydra -l root -p admin 69.167.51.201 -t 4 ssh
 
 	hydra -l root -P /usr/share/wordlists/metasploit/piata_ssh_userpass.txt 69.167.51.201 -t 4 
+
+===========================================================================================================================
+Medusa:
+	"medusa -h 192.168.1.1 -u "admin" -P hugewordlist.txt -M http"
+	
+ -h [TARGET]
+Target hostname or IP address.
+
+-H [FILE]
+Reads target specifications from the file specified rather than from the command line. The file should contain a list separated by newlines.
+
+-u [TARGET]
+Target username.
+
+-U [FILE]
+Reads target usernames from the file specified rather than from the command line. The file should contain a list separated by newlines.
+
+-p [TARGET]
+Target password.
+
+-P [FILE]
+Reads target passwords from the file specified rather than from the command line. The file should contain a list separated by newlines.
+
+-C [FILE]
+File containing combo entries. Combo files are colon separated and in the following format: host:user:password. If any of the three fields are left empty, the respective information should be provided either as a single global value or as a list in a file.
+
+-O [FILE]
+File to append log information to. Medusa will log all accounts credentials found to be valid or cause an unknown error. It will also log the start and stop times of an audit, along with the calling parameters.
+
+-e [n/s/ns]
+Additional password checks ([n] No Password, [s] Password = Username). If both options are being used, they should be specified together ("-e ns"). If only a single option is being called use either "-e n" or "-e s".
+
+-M [TEXT]
+Name of the module to execute (without the .mod extension).
+
+-m [TEXT]
+Parameter to pass to the module. This can be passed multiple times with a different parameter each time and they will all be sent to the module (i.e. -m Param1 -m Param2, etc.)
+
+-d
+Dump all known modules.
+
+-n [NUM]
+Use for non-default TCP port number.
+
+-s
+Enable SSL.
+
+-g [NUM]
+Give up after trying to connect for NUM seconds (default 3).
+
+-r [NUM]
+Sleep NUM seconds between retry attempts (default 3).
+
+-R [NUM]
+Attempt NUM retries before giving up. The total number of attempts will be NUM + 1.
+
+
+-t [NUM]
+Total number of logins to be tested concurrently. It should be noted that rougly t x T threads could be running at any one time. 381 appears to be the limit on my fairly boring Gentoo Linux host.
+
+-T [NUM]
+Total number of hosts to be tested concurrently.
+
+-L
+Parallelize logins using one username per thread. The default is to process the entire username before proceeding.
+
+-f
+Stop scanning host after first valid username/password found.
+
+-F
+Stop audit after first valid username/password found on any host.
+
+-b
+Suppress startup banner
+
+-q
+Display module's usage information. This should be used in conjunction with the "-M" option. For example, "medusa -M smbnt -q".
+
+-v [NUM]
+Verbose level [0 - 6 (more)]. All messages at or below the specified level will be displayed. The default level is 5.
+
+-w [NUM]
+Error debug level [0 - 10 (more)]. All messages at or below the specified level will be displayed. The default level is 5.
+
+-V
+Display version
+
+Available Medusa Modules:
+
+    afp.mod : Brute force module for AFP sessions
+    cvs.mod : Brute force module for CVS sessions
+    ftp.mod : Brute force module for FTP/FTPS sessions
+    http.mod : Brute force module for HTTP
+    imap.mod : Brute force module for IMAP sessions
+    mssql.mod : Brute force module for MSSQL sessions
+    mysql.mod : Brute force module for MySQL sessions
+    nntp.mod : Brute force module for NNTP sessions
+    pcanywhere.mod : Brute force module for PcAnywhere sessions
+    pop3.mod : Brute force module for POP3 sessions
+    postgres.mod : Brute force module for PostgreSQL sessions
+    rdp.mod : Brute force module for RDP (Microsoft Terminal Server) sessions
+    rexec.mod : Brute force module for REXEC sessions
+    rlogin.mod : Brute force module for RLOGIN sessions
+    rsh.mod : Brute force module for RSH sessions
+    smbnt.mod : Brute force module for SMB (LM/NTLM/LMv2/NTLMv2) sessions
+    smtp-vrfy.mod : Brute force module for verifying SMTP accounts (VRFY/EXPN/RCPT TO)
+    smtp.mod : Brute force module for SMTP Authentication with TLS
+    snmp.mod : Brute force module for SNMP Community Strings
+    ssh.mod : Brute force module for SSH v2 sessions
+    svn.mod : Brute force module for Subversion sessions
+    telnet.mod : Brute force module for telnet sessions
+    vmauthd.mod : Brute force module for the VMware Authentication Daemon
+    vnc.mod : Brute force module for VNC sessions
+    web-form.mod : Brute force module for web form
+    wrapper.mod : Generic Wrapper Module
 
 ===========================================================================================================================
 SQLmap:
