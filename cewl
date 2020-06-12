@@ -1,0 +1,48 @@
+Default Method:
+	Enter the following command which spiders the given URL to a specified depth and prints a list of words which can then be used as a dictionary for cracking the password.
+cewl http://www.randomsite.com 
+
+To save it to a wordlist:
+	'-w file.txt'
+		cewl http://www.randomsite.com -w wordlist.txt
+		
+To see your wordlist:
+	cat wordlist.txt (or whatever you named it)
+	
+Generating Wordlist of Specific Length:
+	'-m 9'
+		cewl https://randomsite.com -m 9
+	The above command will generate a list of minimum 9 words.
+	
+Retrieving Emails from a Website:
+	-e option enables email parameter 
+	-n option hides the list of the word generated while crawling the given website.
+		cewl https://randomsite.com -n -e
+		
+Count the number of Word Repeated in a website:
+	-c option enables count parameter.
+		cewl https://randomsite.com -c
+
+Increase the Depth to Spider:
+	If you want to increase the level of spider for generating a larger list of the word by enumerating more new words from the website then use -d option along with depth level number that enables depth parameter for making more intense creeping. By Default it the depth level set is 2.
+		cewl https://randomsite.com -d 2
+		
+Extra Debug Information
+	use -–debug option to enable debug mode and show errors and raw details of a website while crawling.
+		cewl https://randomsite.com --debug
+		
+Verbose Mode:
+	To expand the website crawling result and for retrieving completed detail of a website, you can use -v option for verbose mode. Rather than generating wordlist, it will dump the information available on the website.
+		cewl https://randomsite.com -v
+		
+Generating Alpha-Numeric
+	If you want to generate an alpha-numeric wordlist then you can use –with-numbers option along with the command.	
+		cewl http://randomsite.com --with-numbers
+		
+Cewl with Digest/Basic Authentication:
+	If there is page authentication for login into the website then above default will not work properly, in order to generate a wordlist you need to bypass the authentication page by using the following parameter:
+		–auth_type: Digest or basic.
+		–auth_user: Authentication username.
+		–auth_pass: Authentication password.
+			cewl http://192.168.1.105/dvwa/login.php --auth_type Digest --auth_user admin --auth_pass password -v
+			cewl http://192.168.1.105/dvwa/login.php --auth_type basic --auth_user admin --auth_pass password -v
