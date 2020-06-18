@@ -296,6 +296,14 @@ Command line options for dir mode
     -to <timeout> – HTTP timeout. Examples: 10s, 100ms, 1m (default: 10s).
 		"gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -u https://10.10.10.84"
 ===========================================================================================================================
+Nikto:
+
+	It enables you to get insights about the host IP address, operating system detection and other network security details that are important during penetration testing.
+	
+perl nikto.pl -host 209.17.116.7 -useragent bob
+===========================================================================================================================
+
+
 #Wfuzz:
 
 Wfuzz can be used to look for hidden content, such as files and directories, within a web server, allowing to find further attack vectors. It is worth noting that, the success of this task depends highly on the dictionaries used.
