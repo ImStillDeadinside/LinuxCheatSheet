@@ -180,7 +180,7 @@ SMBMap allows users to enumerate samba share drives across an entire domain. Lis
 	"smbmap -H <IP>"
 ===========================================================================================================================
 Nmap:
-Best 12 Nmap command examples:
+Top 13 Nmap command examples:
 
 1. Basic Nmap Scan against IP or host
 	"nmap 1.1.1.1"
@@ -251,14 +251,23 @@ The “-iL” parameter lets you read from that file, and scan all those hosts f
 			
 12: FTP brute force attack:
 		"nmap --script ftp-brute -p 21 192.168.1.105"
+		
+13: Scan for MySQL on port 3306
+		"nmap 10.10.10.50 -p 3306"
 
 
 
 
-===========================================================================================================================
+=========================================================================================================
 How to look up IP Address for a website:
+
 nslookup www.whateversite.com
-===========================================================================================================================
+=========================================================================================================
+How to pull a file using Burpsuite:
+
+in a Repeater tab, at the bottom of the request header type:
+	'url=file:///etc/passwd'
+=========================================================================================================
 #Gobuster:
 Common Command line options
 
@@ -295,6 +304,8 @@ Command line options for dir mode
     -U <username> – HTTP Authorization username (Basic Auth only).
     -to <timeout> – HTTP timeout. Examples: 10s, 100ms, 1m (default: 10s).
 		"gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -u https://10.10.10.84"
+		
+		gobuster vhost -w /opt/SecLists/Discovery/DNS/subdomains-top1million.txt -u http://forwardslash.htb
 ===========================================================================================================================
 Nikto:
 
@@ -775,7 +786,7 @@ Available Medusa Modules:
 ===========================================================================================================================
 SQLmap:
 sqlmap -r search.req --batch --force-ssl
-sqlmap -r login.req --batch --force-ssl
+sqlmap -r login.req --batch --force-ssl461
 	-'search.req = info from search bar results using BurpSuite Repeater using 'Copy to File'
 	-'login.req = info from login screen using results from BurpSuite Repeater using 'Copy to File'
 ===========================================================================================================================		
@@ -788,84 +799,4 @@ or
 
 	airmon-ng check kill
 	airmon-ng start wlan0
-===========================================================================================================================
-
-===========================================================================================================================
-Wireshark Filters:
-
-
-Filtering traffic from one server:
-
-ip.addr eq <IP>
-
-Filtering traffic between two servers:
-
-ip.addr eq <IP1> and ip.addr eq <IP2>
-
-Filtering traffic of standard protocols:
-
-smtp
-
-ldap
-
-ssl
-
-http
-
-dns
-
-Filtering an SMTP conversation between two servers:
-
-ip.addr eq <IP1> and ip.addr eq <IP2> and smtp
-
-Filtering an HTTP conversation between two servers:
-
-ip.addr eq <IP1> and ip.addr eq <IP2> and http
-
-Filtering an SMTP Conversation with TLS between two servers:
-
-ip.addr eq <IP1> and ip.addr eq <IP2> and ssl
-
-Filtering outgoing packets from ona particular IP:
-
-ip.src eq <IP>
-
-Filtering incoming packets from one particular IP:
-
-ip.dst eq <IP>
-
-Filtering the number of SMTP sessions:
-
-smtp.req.command eq QUIT
-
-Filtering the number of transmited mails:
-
-smtp.req.command eq MAIL
-
-Filtering the number of recipients in an SMTP conversation:
-
-smtp.req.command eq RCPT
-
-Filtering a specific recipient mailbox:
-
-smtp.req.command eq RCPT and smtp.req.parameter contains “user@domain.com”
-
-Filtering a specific sender mailbox:
-
-smtp.req.command eq MAIL and smtp.req.parameter conatains “user@domain.com”
-
-Filtering SMTP errors:
-
-If you know the error code then use this filter:
-
-smtp.response.code eq <ERROR_CODE>
-
-for example: smtp.response.code eq 421
-
-If you don’t know it, or if you want to list all SMTP errors in the SMTP sessions, then you must first exclude all the valid codes (2XX) until you end up only with 4XX or 5XX codes.
-
-not smtp.response.code eq 220 and not smtp.response.code eq 221 and not smtp.response.code eq 250 and not smtp.response.code eq 354 and smtp.response.code
-
-When you execute this filter you will end up only with 4XX and/or 5XX error codes so you will see all SMTP errors withing your capture. If it ends up blank, it means that no SMTP errors were found in that specific capture.
-
 ===========================================================================================================================
