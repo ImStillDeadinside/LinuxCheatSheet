@@ -1,0 +1,78 @@
+Wireshark Filters:
+
+
+Filtering traffic from one server:
+
+ip.addr eq <IP>
+
+Filtering traffic between two servers:
+
+ip.addr eq <IP1> and ip.addr eq <IP2>
+
+Filtering traffic of standard protocols:
+
+smtp
+
+ldap
+
+ssl
+
+http
+
+dns
+
+Filtering an SMTP conversation between two servers:
+
+ip.addr eq <IP1> and ip.addr eq <IP2> and smtp
+
+Filtering an HTTP conversation between two servers:
+
+ip.addr eq <IP1> and ip.addr eq <IP2> and http
+
+Filtering an SMTP Conversation with TLS between two servers:
+
+ip.addr eq <IP1> and ip.addr eq <IP2> and ssl
+
+Filtering outgoing packets from ona particular IP:
+
+ip.src eq <IP>
+
+Filtering incoming packets from one particular IP:
+
+ip.dst eq <IP>
+
+Filtering the number of SMTP sessions:
+
+smtp.req.command eq QUIT
+
+Filtering the number of transmited mails:
+
+smtp.req.command eq MAIL
+
+Filtering the number of recipients in an SMTP conversation:
+
+smtp.req.command eq RCPT
+
+Filtering a specific recipient mailbox:
+
+smtp.req.command eq RCPT and smtp.req.parameter contains “user@domain.com”
+
+Filtering a specific sender mailbox:
+
+smtp.req.command eq MAIL and smtp.req.parameter conatains “user@domain.com”
+
+Filtering SMTP errors:
+
+If you know the error code then use this filter:
+
+smtp.response.code eq <ERROR_CODE>
+
+for example: smtp.response.code eq 421
+
+If you don’t know it, or if you want to list all SMTP errors in the SMTP sessions, then you must first exclude all the valid codes (2XX) until you end up only with 4XX or 5XX codes.
+
+not smtp.response.code eq 220 and not smtp.response.code eq 221 and not smtp.response.code eq 250 and not smtp.response.code eq 354 and smtp.response.code
+
+When you execute this filter you will end up only with 4XX and/or 5XX error codes so you will see all SMTP errors withing your capture. If it ends up blank, it means that no SMTP errors were found in that specific capture.
+
+===========================================================================================================================
