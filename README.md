@@ -1,7 +1,5 @@
 # LinuxCheatSheet
 
-** slowly converting this to a website! visit https://linux-cs.com to check it out** 
-
 
 Topics include (not in order): <br>
 Updating/upgrading Kali Linux <br>
